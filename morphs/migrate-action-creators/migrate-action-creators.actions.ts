@@ -156,9 +156,10 @@ export class ActionCreatorsActionsMorpher {
             .includes(reference)
         ) {
           // update action references in call expressions
-          callExpression.addArgument(actionClass.getName().replace(/^\w/, c => c.toLowerCase()));
-          callExpression.removeArgument(reference);
-
+          callExpression
+            .getArguments()
+            .filter(arg => arg === reference)
+            .forEach(arg => arg.replaceWithText(actionClass.getName().replace(/^\w/, c => c.toLowerCase())));
           i++;
         }
 
