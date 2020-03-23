@@ -149,6 +149,7 @@ export class ActionCreatorsActionsMorpher {
           // swap new class instantiation to actionCreator call
           const hasArgument = newExpression.getArguments().length > 0;
           const argument = hasArgument ? `{payload: ${newExpression.getArguments()[0].getText()}}` : '';
+          
 
           // update general new statements in function calls or arrow functions or arrays
           if (newExpression.getParent().getKind() === SyntaxKind.CallExpression) {
@@ -176,10 +177,7 @@ export class ActionCreatorsActionsMorpher {
             i++;
           } else if (newExpression.getParent().getKind() === SyntaxKind.ReturnStatement) {
             const returnStmt = newExpression.getParentIfKindOrThrow(SyntaxKind.ReturnStatement);
-            const parentBlock = returnStmt.getParentIfKindOrThrow(SyntaxKind.Block);
-            const newReturn = `return ${updateNewExpressionString(actionClass.getName(), argument)}`;
-            returnStmt.remove();
-            parentBlock.addStatements(newReturn);
+            returnStmt.replaceWithText(`return ${updateNewExpressionString(actionClass.getName(), argument)}`);
             i++;
           } else if (newExpression.getParent().getKind() === SyntaxKind.ConditionalExpression) {
             const condExp = newExpression.getParentIfKindOrThrow(SyntaxKind.ConditionalExpression);
