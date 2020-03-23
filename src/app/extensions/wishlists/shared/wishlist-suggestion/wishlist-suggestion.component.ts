@@ -54,8 +54,8 @@ export class WishlistSuggestionComponent implements OnInit {
         clickable: true,
         clickableClass: 'swiper-pagination-clickable',
       },
-      slidesPerView: 3,
-      slidesPerGroup: 3,
+      slidesPerView: 4,
+      slidesPerGroup: 4,
     };
   }
 
