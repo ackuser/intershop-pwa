@@ -254,7 +254,7 @@ describe('User Reducer', () => {
   });
 });
 
-describe('User Reducer for loading payment methods', () => {
+describe('User Reducer', () => {
   describe('LoadUserPaymentMethods action', () => {
     it('should set loading when reduced', () => {
       const action = new LoadUserPaymentMethods();
@@ -286,7 +286,7 @@ describe('User Reducer for loading payment methods', () => {
   });
 });
 
-describe('User Reducer for deleting payments', () => {
+describe('User Reducer', () => {
   describe('DeleteUserPayment action', () => {
     it('should set loading when reduced', () => {
       const action = new DeleteUserPaymentInstrument({ id: 'paymentInstrumentId' });
@@ -317,7 +317,7 @@ describe('User Reducer for deleting payments', () => {
   });
 });
 
-describe('User Reducer for Password Reminder', () => {
+describe('User Reducer', () => {
   describe('initialState', () => {
     it('should have nothing in it when unmodified', () => {
       expect(initialState.passwordReminderError).toBeUndefined();

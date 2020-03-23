@@ -69,11 +69,11 @@ export function ngrxTesting<T>(
     reducers?: ActionReducerMap<T, Action>;
     effects?: Type<any>[];
     config?: RootStoreConfig<T>;
-    router?: boolean;
+    routerStore?: boolean;
   } = {}
 ) {
   let reducers = options.reducers || ({} as ActionReducerMap<T, Action>);
-  if (options.router) {
+  if (options.routerStore) {
     reducers = { ...reducers, router: routerReducer };
   }
   const array = [
@@ -89,7 +89,7 @@ export function ngrxTesting<T>(
     EffectsModule.forRoot([TestStore, ...(options.effects || [])]),
   ];
 
-  if (options.router) {
+  if (options.routerStore) {
     array.push(StoreRouterConnectingModule.forRoot({ serializer: CustomRouterSerializer }));
   }
 
