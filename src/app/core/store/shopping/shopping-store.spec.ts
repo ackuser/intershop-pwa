@@ -234,8 +234,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/home"}
-        [Viewconf Internal] Set Device Type:
-          deviceType: "pc"
         [Shopping] Load top level categories:
           depth: 1
         [Shopping] Load top level categories success:
@@ -412,8 +410,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123"}
-        [Viewconf Internal] Set Device Type:
-          deviceType: "pc"
         [Shopping] Load top level categories:
           depth: 1
         [Shopping] Load top level categories success:
@@ -491,8 +487,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123.456"}
-        [Viewconf Internal] Set Device Type:
-          deviceType: "pc"
         [Shopping] Load top level categories:
           depth: 1
         [Shopping] Load top level categories success:
@@ -755,8 +749,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123.456/product/P1"}
-        [Viewconf Internal] Set Device Type:
-          deviceType: "pc"
         [Shopping] Load top level categories:
           depth: 1
         [Shopping] Load top level categories success:
@@ -913,8 +905,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/product/P1"}
-        [Viewconf Internal] Set Device Type:
-          deviceType: "pc"
         [Shopping] Load top level categories:
           depth: 1
         [Shopping] Load top level categories success:
@@ -990,8 +980,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123.456/product/P3"}
-        [Viewconf Internal] Set Device Type:
-          deviceType: "pc"
         [Shopping] Load top level categories:
           depth: 1
         [Shopping] Load top level categories success:
@@ -1068,8 +1056,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123.XXX"}
-        [Viewconf Internal] Set Device Type:
-          deviceType: "pc"
         [Shopping] Load top level categories:
           depth: 1
         [Shopping] Load top level categories success:
@@ -1121,8 +1107,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/search/something"}
-        [Viewconf Internal] Set Device Type:
-          deviceType: "pc"
         [Shopping] Load top level categories:
           depth: 1
         [Shopping] Load top level categories success:
