@@ -7,11 +7,7 @@ import {
   VariableDeclarationKind,
 } from 'ts-morph';
 
-import {
-  checkForNamespaceImports,
-  getConditionalWhenExpressions,
-  updateNewExpressionString,
-} from '../morph-helpers/morph-helpers';
+import { checkForNamespaceImports, updateNewExpressionString } from '../morph-helpers/morph-helpers';
 
 import { ActionCreatorsMorpher } from './migrate-action-creators';
 
@@ -149,43 +145,9 @@ export class ActionCreatorsActionsMorpher {
           // swap new class instantiation to actionCreator call
           const hasArgument = newExpression.getArguments().length > 0;
           const argument = hasArgument ? `{payload: ${newExpression.getArguments()[0].getText()}}` : '';
-          
-
-          // update general new statements in function calls or arrow functions or arrays
-          if (newExpression.getParent().getKind() === SyntaxKind.CallExpression) {
-            const callExpParent = newExpression.getParentIfKindOrThrow(SyntaxKind.CallExpression);
-            const argumentText = updateNewExpressionString(actionClass.getName(), argument);
-
-            callExpParent.addArgument(argumentText);
-            callExpParent.removeArgument(newExpression);
-            i++;
-          } else if (newExpression.getParent().getKind() === SyntaxKind.ArrowFunction) {
-            const arrow = newExpression.getParentIfKindOrThrow(SyntaxKind.ArrowFunction);
-
-            const argumentText = updateNewExpressionString(actionClass.getName(), argument);
-            arrow.getFirstChildByKindOrThrow(SyntaxKind.NewExpression).replaceWithText(argumentText);
-            const arrowArgStrings = arrow.getParameters().length === 0 ? '' : arrow.getParameters()[0].getText();
-
-            // ToDo: Multiple Parameters?
-            arrow.getParentIfKind(SyntaxKind.CallExpression).addArgument(`(${arrowArgStrings}) => ${argumentText}`);
-            arrow.getParentIfKind(SyntaxKind.CallExpression).removeArgument(arrow);
-            i++;
-          } else if (newExpression.getParent().getKind() === SyntaxKind.ArrayLiteralExpression) {
-            const array = newExpression.getParentIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-            array.addElement(updateNewExpressionString(actionClass.getName(), argument));
-            array.removeElement(newExpression);
-            i++;
-          } else if (newExpression.getParent().getKind() === SyntaxKind.ReturnStatement) {
-            const returnStmt = newExpression.getParentIfKindOrThrow(SyntaxKind.ReturnStatement);
-            returnStmt.replaceWithText(`return ${updateNewExpressionString(actionClass.getName(), argument)}`);
-            i++;
-          } else if (newExpression.getParent().getKind() === SyntaxKind.ConditionalExpression) {
-            const condExp = newExpression.getParentIfKindOrThrow(SyntaxKind.ConditionalExpression);
-            getConditionalWhenExpressions(condExp)
-              .filter(exp => exp.getPos() === newExpression.getPos())
-              .forEach(exp => exp.replaceWithText(updateNewExpressionString(actionClass.getName(), argument)));
-            i++;
-          }
+          newExpression.replaceWithText(updateNewExpressionString(actionClass.getName(), argument));
+          i++;
+          return;
         } else if (
           callExpression &&
           callExpression
