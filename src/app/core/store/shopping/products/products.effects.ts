@@ -217,7 +217,7 @@ export class ProductsEffects {
   );
 
   @Effect()
-  loadDefaultCategoryContextForProduct$ = this.actions$.pipe(
+  loadDefaultCategoryContextForProduct$ = this.store.pipe(
     ofProductRoute(),
     mapToProperty('categoryUniqueId'),
     whenFalsy(),

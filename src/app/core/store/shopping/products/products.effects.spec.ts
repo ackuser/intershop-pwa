@@ -532,4 +532,71 @@ describe('Products Effects', () => {
       );
     });
   });
+
+  describe('loadDefaultCategoryContextForProduct$', () => {
+    it('should load a default category for the product if none is selected and product has one', done => {
+      store$.dispatch(
+        new fromActions.LoadProductSuccess({
+          product: { sku: 'ABC', type: 'Product', defaultCategoryId: '123' } as Product,
+        })
+      );
+      store$.dispatch(new fromActions.SelectProduct({ sku: 'ABC' }));
+
+      router.navigateByUrl('/product/ABC');
+
+      effects.loadDefaultCategoryContextForProduct$.subscribe(action => {
+        expect(action).toMatchInlineSnapshot(`
+          [Shopping] Load Category:
+            categoryId: "123"
+        `);
+        done();
+      });
+    });
+
+    it('should not load a default category for the product if none is selected and product has none', done => {
+      store$.dispatch(
+        new fromActions.LoadProductSuccess({
+          product: { sku: 'ABC', type: 'Product' } as Product,
+        })
+      );
+      store$.dispatch(new fromActions.SelectProduct({ sku: 'ABC' }));
+
+      router.navigateByUrl('/product/ABC');
+
+      effects.loadDefaultCategoryContextForProduct$.subscribe(fail, fail, fail);
+
+      setTimeout(done, 1000);
+    });
+
+    it('should not load a default category for the product if the product failed loading', done => {
+      store$.dispatch(
+        new fromActions.LoadProductFail({
+          sku: 'ABC',
+          error: { error: 'ERROR' } as HttpError,
+        })
+      );
+      store$.dispatch(new fromActions.SelectProduct({ sku: 'ABC' }));
+
+      router.navigateByUrl('/product/ABC');
+
+      effects.loadDefaultCategoryContextForProduct$.subscribe(fail, fail, fail);
+
+      setTimeout(done, 1000);
+    });
+
+    it('should not load a default category for the product if the category is taken from the context', done => {
+      store$.dispatch(
+        new fromActions.LoadProductSuccess({
+          product: { sku: 'ABC', type: 'Product', defaultCategoryId: '123' } as Product,
+        })
+      );
+      store$.dispatch(new fromActions.SelectProduct({ sku: 'ABC' }));
+
+      router.navigateByUrl('/category/456/product/ABC');
+
+      effects.loadDefaultCategoryContextForProduct$.subscribe(fail, fail, fail);
+
+      setTimeout(done, 1000);
+    });
+  });
 });
