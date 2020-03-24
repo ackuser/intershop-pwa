@@ -20,13 +20,12 @@ export class ActionCreatorsEffectMorpher {
       .filter(property => property.getFirstChildByKind(SyntaxKind.Decorator))
       .forEach(effect => {
         // retrieve information from effect
-        const name = effect.getFirstChildByKindOrThrow(SyntaxKind.Identifier).getText();
+        const name = effect.getName();
         const decoratorConfig = effect.getFirstChildByKindOrThrow(SyntaxKind.Decorator).getArguments();
-        let logic = effect.getFirstChildByKindOrThrow(SyntaxKind.CallExpression);
+        let logic = effect.getInitializerIfKindOrThrow(SyntaxKind.CallExpression);
 
         // update effect logic
         logic = this.updateOfType(logic);
-        logic = this.updateMap(logic);
         logic = this.updateMapErrorToAction(logic);
 
         // add new updated property declaration
