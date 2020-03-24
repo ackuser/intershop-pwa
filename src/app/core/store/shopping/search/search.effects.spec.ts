@@ -335,8 +335,9 @@ describe('Search Effects', () => {
     describe('searchProducts$', () => {
       it('should perform an additional search for given search term and trigger actions', fakeAsync(() => {
         const searchTerm = '123';
+        router.navigate(['search', searchTerm]);
+        tick(500);
 
-        store$.dispatch(new SearchProducts({ searchTerm }));
         verify(productsServiceMock.searchProducts(searchTerm, 1, anything())).once();
 
         store$.dispatch(new LoadMoreProducts({ id: { type: 'search', value: searchTerm }, page: 2 }));
