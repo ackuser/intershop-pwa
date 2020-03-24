@@ -234,16 +234,16 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/home"}
-        [Shopping] Load top level categories:
-          depth: 1
-        [Shopping] Load top level categories success:
-          categories: tree(A,A.123,B)
         @ngrx/router-store/navigation:
           routerState: {"url":"/home","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/home"}
         @ngrx/router-store/navigated:
           routerState: {"url":"/home","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/home"}
+        [Shopping] Load top level categories:
+          depth: 1
+        [Shopping] Load top level categories success:
+          categories: tree(A,A.123,B)
       `);
 
       expect(getCategoryIds(store.state)).toBeArrayOfSize(3);
@@ -410,10 +410,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123"}
-        [Shopping] Load top level categories:
-          depth: 1
-        [Shopping] Load top level categories success:
-          categories: tree(A,A.123,B)
         @ngrx/router-store/navigation:
           routerState: {"url":"/category/A.123","params":{"categoryUniqueId":"A.123...
           event: {"id":1,"url":"/category/A.123"}
@@ -432,6 +428,10 @@ describe('Shopping Store', () => {
         @ngrx/router-store/navigated:
           routerState: {"url":"/category/A.123","params":{"categoryUniqueId":"A.123...
           event: {"id":1,"url":"/category/A.123"}
+        [Shopping] Load top level categories:
+          depth: 1
+        [Shopping] Load top level categories success:
+          categories: tree(A,A.123,B)
       `);
     }));
 
@@ -487,10 +487,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123.456"}
-        [Shopping] Load top level categories:
-          depth: 1
-        [Shopping] Load top level categories success:
-          categories: tree(A,A.123,B)
         @ngrx/router-store/navigation:
           routerState: {"url":"/category/A.123.456","params":{"categoryUniqueId":"A...
           event: {"id":1,"url":"/category/A.123.456"}
@@ -543,6 +539,12 @@ describe('Shopping Store', () => {
         @ngrx/router-store/navigated:
           routerState: {"url":"/category/A.123.456","params":{"categoryUniqueId":"A...
           event: {"id":1,"url":"/category/A.123.456"}
+        [Shopping] Load top level categories:
+          depth: 1
+        [Shopping] Load top level categories success:
+          categories: tree(A,A.123,B)
+        [ProductListing] Load More Products:
+          id: {"type":"category","value":"A.123.456"}
       `);
     }));
 
@@ -749,10 +751,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123.456/product/P1"}
-        [Shopping] Load top level categories:
-          depth: 1
-        [Shopping] Load top level categories success:
-          categories: tree(A,A.123,B)
         @ngrx/router-store/navigation:
           routerState: {"url":"/category/A.123.456/product/P1","params":{"categoryU...
           event: {"id":1,"url":"/category/A.123.456/product/P1"}
@@ -784,6 +782,10 @@ describe('Shopping Store', () => {
         @ngrx/router-store/navigated:
           routerState: {"url":"/category/A.123.456/product/P1","params":{"categoryU...
           event: {"id":1,"url":"/category/A.123.456/product/P1"}
+        [Shopping] Load top level categories:
+          depth: 1
+        [Shopping] Load top level categories success:
+          categories: tree(A,A.123,B)
       `);
     }));
 
@@ -905,10 +907,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/product/P1"}
-        [Shopping] Load top level categories:
-          depth: 1
-        [Shopping] Load top level categories success:
-          categories: tree(A,A.123,B)
         @ngrx/router-store/navigation:
           routerState: {"url":"/product/P1","params":{"sku":"P1"},"queryParams":{},...
           event: {"id":1,"url":"/product/P1"}
@@ -924,6 +922,10 @@ describe('Shopping Store', () => {
         @ngrx/router-store/navigated:
           routerState: {"url":"/product/P1","params":{"sku":"P1"},"queryParams":{},...
           event: {"id":1,"url":"/product/P1"}
+        [Shopping] Load top level categories:
+          depth: 1
+        [Shopping] Load top level categories success:
+          categories: tree(A,A.123,B)
       `);
     }));
 
@@ -980,10 +982,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123.456/product/P3"}
-        [Shopping] Load top level categories:
-          depth: 1
-        [Shopping] Load top level categories success:
-          categories: tree(A,A.123,B)
         @ngrx/router-store/navigation:
           routerState: {"url":"/category/A.123.456/product/P3","params":{"categoryU...
           event: {"id":1,"url":"/category/A.123.456/product/P3"}
@@ -1026,6 +1024,10 @@ describe('Shopping Store', () => {
         @ngrx/router-store/navigated:
           routerState: {"url":"/error","params":{},"queryParams":{},"data":{}}
           event: {"id":2,"url":"/error"}
+        [Shopping] Load top level categories:
+          depth: 1
+        [Shopping] Load top level categories success:
+          categories: tree(A,A.123,B)
       `);
     }));
 
@@ -1056,10 +1058,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/category/A.123.XXX"}
-        [Shopping] Load top level categories:
-          depth: 1
-        [Shopping] Load top level categories success:
-          categories: tree(A,A.123,B)
         @ngrx/router-store/navigation:
           routerState: {"url":"/category/A.123.XXX","params":{"categoryUniqueId":"A...
           event: {"id":1,"url":"/category/A.123.XXX"}
@@ -1083,6 +1081,10 @@ describe('Shopping Store', () => {
         @ngrx/router-store/navigated:
           routerState: {"url":"/error","params":{},"queryParams":{},"data":{}}
           event: {"id":2,"url":"/error"}
+        [Shopping] Load top level categories:
+          depth: 1
+        [Shopping] Load top level categories success:
+          categories: tree(A,A.123,B)
       `);
     }));
 
@@ -1107,10 +1109,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":1,"url":"/search/something"}
-        [Shopping] Load top level categories:
-          depth: 1
-        [Shopping] Load top level categories success:
-          categories: tree(A,A.123,B)
         @ngrx/router-store/navigation:
           routerState: {"url":"/search/something","params":{"searchTerm":"something...
           event: {"id":1,"url":"/search/something"}
@@ -1143,6 +1141,10 @@ describe('Shopping Store', () => {
         @ngrx/router-store/navigated:
           routerState: {"url":"/search/something","params":{"searchTerm":"something...
           event: {"id":1,"url":"/search/something"}
+        [Shopping] Load top level categories:
+          depth: 1
+        [Shopping] Load top level categories success:
+          categories: tree(A,A.123,B)
       `);
     }));
   });

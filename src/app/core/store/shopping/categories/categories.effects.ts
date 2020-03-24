@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { routerRequestAction } from '@ngrx/router-store';
+import { routerNavigatedAction } from '@ngrx/router-store';
 import { Store, select } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import {
@@ -118,7 +118,7 @@ export class CategoriesEffects {
 
   @Effect()
   loadTopLevelWhenUnavailable$ = this.actions$.pipe(
-    ofType(routerRequestAction),
+    ofType(routerNavigatedAction),
     switchMapTo(this.store.pipe(select(selectors.isTopLevelCategoriesLoaded))),
     whenFalsy(),
     mapTo(new actions.LoadTopLevelCategories({ depth: this.mainNavigationMaxSubCategoriesDepth }))

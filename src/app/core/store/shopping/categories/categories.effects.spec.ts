@@ -4,7 +4,7 @@ import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { routerRequestAction } from '@ngrx/router-store';
+import { routerNavigatedAction } from '@ngrx/router-store';
 import { Action, Store, combineReducers } from '@ngrx/store';
 import { cold, hot } from 'jest-marbles';
 import { Observable, noop, of, throwError } from 'rxjs';
@@ -251,7 +251,7 @@ describe('Categories Effects', () => {
       const completion = new fromActions.LoadTopLevelCategories({ depth });
 
       // tslint:disable-next-line: no-any
-      actions$ = hot('        ----a---a--a', { a: routerRequestAction({ payload: {} as any }) });
+      actions$ = hot('        ----a---a--a', { a: routerNavigatedAction({ payload: {} as any }) });
       const expected$ = cold('----a---a--a', { a: completion });
 
       expect(effects.loadTopLevelWhenUnavailable$).toBeObservable(expected$);
@@ -261,7 +261,7 @@ describe('Categories Effects', () => {
       store$.dispatch(new fromActions.LoadTopLevelCategoriesSuccess({ categories: categoryTree() }));
 
       // tslint:disable-next-line: no-any
-      actions$ = hot('        ----a---a--a', { a: routerRequestAction({ payload: {} as any }) });
+      actions$ = hot('        ----a---a--a', { a: routerNavigatedAction({ payload: {} as any }) });
       const expected$ = cold('------------');
 
       expect(effects.loadTopLevelWhenUnavailable$).toBeObservable(expected$);
