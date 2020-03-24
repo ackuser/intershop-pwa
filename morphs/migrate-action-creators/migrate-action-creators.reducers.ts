@@ -1,6 +1,6 @@
 import { CaseClause, SourceFile, SyntaxKind, VariableDeclarationKind } from 'ts-morph';
 
-import { checkForNamespaceImports, createActionTypes } from '../morph-helpers/morph-helpers';
+import { checkForNamespaceImports, createActionTypes, getReducerFunction } from '../morph-helpers/morph-helpers';
 
 import { ActionCreatorsMorpher } from './migrate-action-creators';
 
@@ -83,17 +83,15 @@ export class ActionCreatorsReducerMorpher {
    * update reducer function to use the newly constructed version using createReducer
    */
   private updateFeatureReducer() {
-    this.reducerFile
-      .getFunction(`${this.parent.storeName}Reducer`)
+    getReducerFunction(this.reducerFile)
       .getParameter('action')
       .remove();
-    this.reducerFile.getFunction(`${this.parent.storeName}Reducer`).addParameter({ name: 'action', type: 'Action' });
-    this.reducerFile
-      .getFunction(`${this.parent.storeName}Reducer`)
+    getReducerFunction(this.reducerFile).addParameter({ name: 'action', type: 'Action' });
+    getReducerFunction(this.reducerFile)
       .getFirstChildByKindOrThrow(SyntaxKind.Block)
       .getStatements()
       .forEach(statement => statement.remove());
-    this.reducerFile.getFunction(`${this.parent.storeName}Reducer`).setBodyText('return reducer(state,action)');
+    getReducerFunction(this.reducerFile).setBodyText('return reducer(state,action)');
   }
 
   /**
@@ -104,15 +102,11 @@ export class ActionCreatorsReducerMorpher {
     this.switchStatements = [];
     let previousIdentifiers: string[] = [];
 
-    if (
-      this.reducerFile.getFunction(`${this.parent.storeName}Reducer`).getDescendantsOfKind(SyntaxKind.SwitchStatement)
-        .length === 0
-    ) {
+    if (getReducerFunction(this.reducerFile).getDescendantsOfKind(SyntaxKind.SwitchStatement).length === 0) {
       throw new Error('this reducer does not include a switch statement. Please migrate manually');
     }
     // iterate over reducer switch cases and store info
-    this.reducerFile
-      .getFunction(`${this.parent.storeName}Reducer`)
+    getReducerFunction(this.reducerFile)
       .getFirstDescendantByKind(SyntaxKind.CaseBlock)
       .getClauses()
       .filter(clause => clause.getKind() === SyntaxKind.CaseClause)

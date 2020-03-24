@@ -55,7 +55,15 @@ export function checkForNamespaceImports(sourceFile: SourceFile) {
 
 /**
  * returns expression from conditional as array
+ * @param conditional the conditional to extract expressions from
  */
 export function getConditionalWhenExpressions(conditional: ConditionalExpression): Expression[] {
   return [conditional.getWhenTrue(), conditional.getWhenFalse()];
+}
+
+/**
+ *
+ */
+export function getReducerFunction(reducerFile: SourceFile) {
+  return reducerFile.getFunctions().filter(func => func.getName().endsWith('Reducer'))[0];
 }
