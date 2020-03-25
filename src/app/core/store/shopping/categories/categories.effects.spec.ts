@@ -19,7 +19,6 @@ import { CategoriesService } from 'ish-core/services/categories/categories.servi
 import { SetAvailableLocales } from 'ish-core/store/locale';
 import { localeReducer } from 'ish-core/store/locale/locale.reducer';
 import { LoadMoreProducts } from 'ish-core/store/shopping/product-listing';
-import { SelectProduct } from 'ish-core/store/shopping/products/products.actions';
 import { shoppingReducers } from 'ish-core/store/shopping/shopping-store.module';
 import { ngrxTesting } from 'ish-core/utils/dev/ngrx-testing';
 import { categoryTree } from 'ish-core/utils/dev/test-data-utils';
@@ -321,7 +320,6 @@ describe('Categories Effects', () => {
 
       it('should do nothing when product is selected', () => {
         store$.dispatch(new fromActions.LoadCategorySuccess({ categories: categoryTree([category]) }));
-        store$.dispatch(new SelectProduct({ sku: 'P222' }));
 
         expect(effects.productOrCategoryChanged$).toBeObservable(cold('-'));
       });

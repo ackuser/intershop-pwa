@@ -375,13 +375,11 @@ describe('Shopping Store', () => {
             @ngrx/router-store/navigation:
               routerState: {"url":"/product/P2","params":{"sku":"P2"},"queryParams":{},...
               event: {"id":3,"url":"/product/P2"}
-            [Shopping] Select Product:
+            [Shopping] Load Product:
               sku: "P2"
             [Recently Viewed] Add Product to Recently:
               sku: "P2"
               group: undefined
-            [Shopping] Load Product:
-              sku: "P2"
             [Shopping] Load Product Success:
               product: {"sku":"P2"}
             @ngrx/router-store/navigated:
@@ -567,13 +565,11 @@ describe('Shopping Store', () => {
           @ngrx/router-store/navigation:
             routerState: {"url":"/category/A.123.456/product/P1","params":{"categoryU...
             event: {"id":2,"url":"/category/A.123.456/product/P1"}
-          [Shopping] Select Product:
+          [Shopping] Load Product:
             sku: "P1"
           [Recently Viewed] Add Product to Recently:
             sku: "P1"
             group: undefined
-          [Shopping] Load Product:
-            sku: "P1"
           [Shopping] Load Product Success:
             product: {"sku":"P1"}
           @ngrx/router-store/navigated:
@@ -603,8 +599,6 @@ describe('Shopping Store', () => {
               event: {"id":3,"url":"/category/A.123.456"}
             [ProductListing] Load More Products:
               id: {"type":"category","value":"A.123.456"}
-            [Shopping] Select Product:
-              sku: undefined
             @ngrx/router-store/navigated:
               routerState: {"url":"/category/A.123.456","params":{"categoryUniqueId":"A...
               event: {"id":3,"url":"/category/A.123.456"}
@@ -756,21 +750,19 @@ describe('Shopping Store', () => {
           event: {"id":1,"url":"/category/A.123.456/product/P1"}
         [Shopping] Select Category:
           categoryId: "A.123.456"
-        [Shopping] Select Product:
+        [Shopping] Load Product:
           sku: "P1"
         [Shopping] Load Category:
           categoryId: "A.123.456"
-        [Shopping] Load Product:
-          sku: "P1"
-        [Shopping] Load Category Success:
-          categories: tree(A.123.456)
         [Shopping] Load Product Success:
           product: {"sku":"P1"}
-        [Shopping] Selected Category Available:
-          categoryId: "A.123.456"
+        [Shopping] Load Category Success:
+          categories: tree(A.123.456)
         [Recently Viewed] Add Product to Recently:
           sku: "P1"
           group: undefined
+        [Shopping] Selected Category Available:
+          categoryId: "A.123.456"
         [Shopping] Load Category:
           categoryId: "A"
         [Shopping] Load Category:
@@ -816,8 +808,6 @@ describe('Shopping Store', () => {
             event: {"id":2,"url":"/category/A.123.456"}
           [ProductListing] Load More Products:
             id: {"type":"category","value":"A.123.456"}
-          [Shopping] Select Product:
-            sku: undefined
           [ProductListing Internal] Load More Products For Params:
             id: {"type":"category","value":"A.123.456"}
             filters: undefined
@@ -875,8 +865,6 @@ describe('Shopping Store', () => {
             routerState: {"url":"/compare","params":{},"queryParams":{},"data":{}}
             event: {"id":2,"url":"/compare"}
           [Shopping] Deselect Category
-          [Shopping] Select Product:
-            sku: undefined
           @ngrx/router-store/navigated:
             routerState: {"url":"/compare","params":{},"queryParams":{},"data":{}}
             event: {"id":2,"url":"/compare"}
@@ -910,8 +898,6 @@ describe('Shopping Store', () => {
         @ngrx/router-store/navigation:
           routerState: {"url":"/product/P1","params":{"sku":"P1"},"queryParams":{},...
           event: {"id":1,"url":"/product/P1"}
-        [Shopping] Select Product:
-          sku: "P1"
         [Shopping] Load Product:
           sku: "P1"
         [Shopping] Load Product Success:
@@ -950,8 +936,6 @@ describe('Shopping Store', () => {
           @ngrx/router-store/navigation:
             routerState: {"url":"/compare","params":{},"queryParams":{},"data":{}}
             event: {"id":2,"url":"/compare"}
-          [Shopping] Select Product:
-            sku: undefined
           @ngrx/router-store/navigated:
             routerState: {"url":"/compare","params":{},"queryParams":{},"data":{}}
             event: {"id":2,"url":"/compare"}
@@ -987,19 +971,15 @@ describe('Shopping Store', () => {
           event: {"id":1,"url":"/category/A.123.456/product/P3"}
         [Shopping] Select Category:
           categoryId: "A.123.456"
-        [Shopping] Select Product:
+        [Shopping] Load Product:
           sku: "P3"
         [Shopping] Load Category:
           categoryId: "A.123.456"
-        [Shopping] Load Product:
-          sku: "P3"
-        [Shopping] Load Category Success:
-          categories: tree(A.123.456)
         [Shopping] Load Product Fail:
           error: {"message":"error loading product P3"}
           sku: "P3"
-        [Shopping] Selected Category Available:
-          categoryId: "A.123.456"
+        [Shopping] Load Category Success:
+          categories: tree(A.123.456)
         @ngrx/router-store/cancel:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           storeState: {"user":{"authorized":false,"loading":false},"addresses":{"i...
@@ -1007,13 +987,13 @@ describe('Shopping Store', () => {
         @ngrx/router-store/request:
           routerState: {"url":"","params":{},"queryParams":{},"data":{}}
           event: {"id":2,"url":"/error"}
+        [Shopping] Selected Category Available:
+          categoryId: "A.123.456"
+        [Shopping] Deselect Category
         [Shopping] Load Category:
           categoryId: "A"
         [Shopping] Load Category:
           categoryId: "A.123"
-        [Shopping] Deselect Category
-        [Shopping] Select Product:
-          sku: undefined
         [Shopping] Load Category Success:
           categories: tree(A,A.123)
         [Shopping] Load Category Success:

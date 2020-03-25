@@ -14,6 +14,7 @@ import {
   createVariationProductView,
 } from 'ish-core/models/product-view/product-view.model';
 import { Product, ProductHelper } from 'ish-core/models/product/product.model';
+import { selectRouteParam } from 'ish-core/store/router';
 import { getCategoryTree } from 'ish-core/store/shopping/categories';
 import { getShoppingState } from 'ish-core/store/shopping/shopping-store';
 
@@ -38,10 +39,7 @@ export const { selectEntities: getProductEntities, selectIds: getProductIds } = 
   getProductsState
 );
 
-export const getSelectedProductId = createSelector(
-  getProductsState,
-  state => state.selected
-);
+export const getSelectedProductId = selectRouteParam('sku');
 
 export const getFailed = createSelector(
   getProductsState,
