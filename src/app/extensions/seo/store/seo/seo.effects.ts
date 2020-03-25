@@ -5,15 +5,15 @@ import { Store, select } from '@ngrx/store';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { MetaService } from '@ngx-meta/core';
 import { TranslateService } from '@ngx-translate/core';
-import { debounce, distinctUntilKeyChanged, filter, first, map, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilKeyChanged, filter, first, map, switchMap, tap } from 'rxjs/operators';
 
+import { CategoryHelper } from 'ish-core/models/category/category.model';
 import { ProductHelper } from 'ish-core/models/product/product.helper';
 import { SeoAttributes } from 'ish-core/models/seo-attribute/seo-attribute.model';
 import { ofCategoryRoute } from 'ish-core/routing/category/category.route';
 import { generateProductUrl, ofProductRoute } from 'ish-core/routing/product/product.route';
 import { getSelectedContentPage } from 'ish-core/store/content/pages';
 import { ofUrl, selectRouteParam } from 'ish-core/store/router';
-import { CategoriesActionTypes } from 'ish-core/store/shopping/categories';
 import { getSelectedCategory } from 'ish-core/store/shopping/categories/categories.selectors';
 import { getSelectedProduct } from 'ish-core/store/shopping/products';
 import { mapToPayload, mapToProperty, whenTruthy } from 'ish-core/utils/operators';
@@ -77,10 +77,10 @@ export class SeoEffects {
   @Effect()
   seoCategory$ = this.actions$.pipe(
     ofCategoryRoute(),
-    debounce(() => this.actions$.pipe(ofType(CategoriesActionTypes.SelectedCategoryAvailable))),
     switchMap(() =>
       this.store.pipe(
         select(getSelectedCategory),
+        filter(CategoryHelper.isCategoryCompletelyLoaded),
         map(
           c =>
             c &&

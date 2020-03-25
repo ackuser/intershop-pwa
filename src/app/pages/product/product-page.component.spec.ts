@@ -9,7 +9,6 @@ import { MockComponent } from 'ng-mocks';
 import { noop } from 'rxjs';
 
 import { FeatureToggleModule } from 'ish-core/feature-toggle.module';
-import { Category } from 'ish-core/models/category/category.model';
 import { VariationSelection } from 'ish-core/models/product-variation/variation-selection.model';
 import { VariationProductView } from 'ish-core/models/product-view/product-view.model';
 import { ProductRetailSet } from 'ish-core/models/product/product-retail-set.model';
@@ -19,12 +18,10 @@ import { Product, ProductCompletenessLevel } from 'ish-core/models/product/produ
 import { ProductRoutePipe } from 'ish-core/routing/product/product-route.pipe';
 import { ApplyConfiguration } from 'ish-core/store/configuration';
 import { coreReducers } from 'ish-core/store/core-store.module';
-import { LoadCategorySuccess, SelectCategory } from 'ish-core/store/shopping/categories';
 import { LoadProductSuccess, LoadProductVariationsSuccess } from 'ish-core/store/shopping/products';
 import { shoppingReducers } from 'ish-core/store/shopping/shopping-store.module';
 import { findAllIshElements } from 'ish-core/utils/dev/html-query-utils';
 import { TestStore, ngrxTesting } from 'ish-core/utils/dev/ngrx-testing';
-import { categoryTree } from 'ish-core/utils/dev/test-data-utils';
 import { BreadcrumbComponent } from 'ish-shared/components/common/breadcrumb/breadcrumb.component';
 import { LoadingComponent } from 'ish-shared/components/common/loading/loading.component';
 import { RecentlyViewedComponent } from 'ish-shared/components/recently/recently-viewed/recently-viewed.component';
@@ -89,10 +86,10 @@ describe('Product Page Component', () => {
     store$ = TestBed.get(TestStore);
     store$.dispatch(new ApplyConfiguration({ features: ['recently'] }));
 
-    store$.dispatch(
-      new LoadCategorySuccess({ categories: categoryTree([{ uniqueId: 'A', categoryPath: ['A'] } as Category]) })
-    );
-    store$.dispatch(new SelectCategory({ categoryId: 'A' }));
+    // store$.dispatch(
+    //   new LoadCategorySuccess({ categories: categoryTree([{ uniqueId: 'A', categoryPath: ['A'] } as Category]) })
+    // );
+    // store$.dispatch(new SelectCategory({ categoryId: 'A' }));
   });
 
   it('should be created', () => {
