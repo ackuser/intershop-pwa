@@ -12,9 +12,11 @@ const config = {
   },
   save: true,
   saveIndividual: false,
+  explicitPath: true,
 };
 
-const storeName = 'orders';
+const storeName = 'viewconf';
+const storePath = 'D:/Projects/pwa-github/src/app/core/store/checkout/viewconf'; // no closing slash
 const project = new Project({
   tsConfigFilePath: 'D:/Projects/pwa-github/tsconfig.json',
 });
@@ -28,9 +30,10 @@ export class ActionCreatorsMorpher {
   effectsMorph: ActionCreatorsEffectMorpher;
 
   constructor(public storeName: string, public project: Project, public config) {
-    this.actionsMorph = new ActionCreatorsActionsMorpher(project.getSourceFile(`${storeName}.actions.ts`), this);
-    this.reducerMorph = new ActionCreatorsReducerMorpher(project.getSourceFile(`${storeName}.reducer.ts`), this);
-    this.effectsMorph = new ActionCreatorsEffectMorpher(project.getSourceFile(`${storeName}.effects.ts`), this);
+    const fileAccess = config.explicitPath ? `${storePath}/${storeName}` : storeName;
+    this.actionsMorph = new ActionCreatorsActionsMorpher(project.getSourceFile(`${fileAccess}.actions.ts`), this);
+    this.reducerMorph = new ActionCreatorsReducerMorpher(project.getSourceFile(`${fileAccess}.reducer.ts`), this);
+    this.effectsMorph = new ActionCreatorsEffectMorpher(project.getSourceFile(`${fileAccess}.effects.ts`), this);
   }
 
   migrate() {
